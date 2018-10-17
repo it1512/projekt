@@ -1,7 +1,7 @@
 # projekt
 Projekt Alarm:
 
-Budu dělat laserovou závoru, která v případě narušení začne zvonit. Na desce vysílače bude laser, který jsem vytáhl s chytré propisky a je připraven k použití. Ne sice na moc velkou vzdálenost, ale pro projekt, jehož výsledkem bude zmenšenina garáže, to bude stačit. Na desce přijímače bude fototranzistor, který bude přijímat data a vyhodnocovat je. Rovněž bude ošetřeno zneužití tím, že budu posílat impulsy z laseru. Tím zamezím možnému zneužití. Hlavní program budu psát v ESP8266 LoLin McNode.
+Budu dělat laserovou závoru, která v případě narušení začne zvonit. Na desce vysílače bude laser, který jsem vytáhl z chytré propisky a je připraven k použití. Ne sice na moc velkou vzdálenost, ale pro projekt, jehož výsledkem bude zmenšenina garáže, to bude stačit. Na desce přijímače bude fototranzistor, který bude přijímat data a vyhodnocovat je. Rovněž bude ošetřeno zneužití tím, že budu posílat impulsy z laseru. Tím zamezím možnému zneužití. Hlavní program budu psát v ESP8266 LoLin McNode.
 
 Součástky, které potřebuji k funkčnosti programu jsou: Relátka na 5V, tranzistory, odpory a tak dále.
 
