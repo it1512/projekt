@@ -1,15 +1,19 @@
 # projekt
 Projekt Alarm:
 
-Budu dělat laserovou závoru, která v případě narušení začne zvonit. Na desce vysílače bude laser, který jsem vytáhl z chytré propisky a je připraven k použití. Ne sice na moc velkou vzdálenost, ale pro projekt, jehož výsledkem bude zmenšenina garáže, to bude stačit. Na desce přijímače bude fototranzistor, který bude přijímat data a vyhodnocovat je. Rovněž bude ošetřeno zneužití tím, že budu posílat impulsy z laseru. Tím zamezím možnému zneužití. Hlavní program budu psát v ESP8266 LoLin McNode.
+Budu dělat laserovou závoru, která v případě narušení začne zvonit jednoduchý buzér. Na desce vysílače bude laser, který jsem vytáhl z chytré propisky a je připraven k použití. Ne sice na moc velkou vzdálenost, ale pro projekt, jehož výsledkem bude zmenšenina garáže, to bude stačit. Na desce přijímače bude fototranzistor, který bude přijímat data a vyhodnocovat je. Rovněž bude ošetřeno zneužití tím, že budu posílat impulsy z laseru. Tím zamezím možnému zneužití. Hlavní program budu psát v ESP8266 LoLin McNode.
 
-Součástky, které potřebuji k funkčnosti programu jsou: Relátka na 5V, tranzistory, odpory a tak dále.
+Součástky, které potřebuji k funkčnosti programu jsou: Relátka na 5V, tranzistory, odpory, fototranzistor, tlačítka.
 
-Původně jsem chtěl dělat v Arduinu, ale díky tomu, že budu muset dělat odesílání dat na MQTT, budu muset použít právě MQTT. Moje první pokusy začaly, když jsem doma stáhl a nainstaloval VirtualBox a na něm spustil Ubuntu 16.04. Poté jsem stáhl kód ze stránky:
+Původně jsem chtěl dělat v Arduinu, ale díky tomu, že budu muset dělat odesílání dat na MQTT, budu muset použít právě ESP8266.
+
+PROBLÉMY:
+Moje první pokusy začaly, když jsem doma stáhl a nainstaloval VirtualBox a na něm spustil Ubuntu 16.04. Poté jsem stáhl kód ze stránky:
 
 https://github.com/petrgru/homie-dual-relay -> abych podrobněji zjistil, jak homie funguje. Ve škole jsem ho zprovoznil bez větších problémů a s pomocí pana učitele jsem pochopil, co jak funguje.
 
-Avšak zde byl problém s právy, s kterým jsem myslel, že si poradím, protože ten stejný problém jsem řešil ve škole na PC a úspěšně jej vyřešil. Jenomže doma tento postup nefungoval a po následných konzultacích na fórech a také s panem učitelem jsem přišel se závěrem, že bude problém s tím, že Ubuntu 16.04. spouštím ve VirtualBoxu. Takže jsem se rozhlodl, že to zkusím ještě ve Windowsu i přes to, že mi to pan učitel zavrhl. Vyjímečně měl pravdu, jelikož tam jsem měl chyb ještě víc a nedokázal jsem si s nimi poradit a nechtělo se mi s tím piplat, protože je jednodušší si doma vytvořit stejné podmínky jako ve škole tím, že doma nainstaluju do jednoho ze svých notebooků Ubuntu. Pan učitel mě zaúkoloval tím, že si v něm mám stáhnout VSCode, v něm nainstalovat Platformio a rozběhat MQTT s pomocí Homie. Tak jsem nakonec zprovoznil čistý linux na notebooku a chtěl jsem v aplikacích najít a nainstalovat Visual Studio Code tak, jak jsem to dělal i ve VirtualBoxu. Ten tam však nebyl, tak momentálně pracuji na tom, jak jej v Linuxu správně stáhnout, rozbalit a hlavně nainstalovat.
+Avšak zde byl problém s právy, s kterým jsem myslel, že si poradím, protože ten stejný problém jsem řešil ve škole na PC a úspěšně jej vyřešil. Jenomže doma tento postup nefungoval a po následných konzultacích na fórech a také s panem učitelem jsem přišel se závěrem, že bude problém s tím, že Ubuntu 16.04 spouštím ve VirtualBoxu. Takže jsem se rozhlodl, že to zkusím ještě ve Windowsu i přes to, že mi to pan učitel zavrhl. Vyjímečně měl pravdu, jelikož tam jsem měl chyb ještě víc a nedokázal jsem si s nimi poradit a nechtělo se mi s tím piplat, protože je jednodušší si doma vytvořit stejné podmínky jako ve škole tím, že doma nainstaluju do jednoho ze svých notebooků Ubuntu. Pan učitel mě zaúkoloval tím, že si v něm mám stáhnout VSCode, v něm nainstalovat Platformio a rozběhat MQTT s pomocí Homie. Tak jsem nakonec zprovoznil čistý linux na notebooku a chtěl jsem v aplikacích najít a nainstalovat Visual Studio Code tak, jak jsem to dělal i ve VirtualBoxu. Nakonec jsem jej stáhl a nakonec i úspěšně rozbalil jako soubor .deb a vše se zdalo funkční. Měl jsem tedy připravené podmínky pro první test na mém notebooku abych konečně mohl dělat vlastní kód, když už vím, jak funguje MQTT. Avšak se naskytl další problém s ručně nastavenou školní adresou, což dělal pan učitel Grussmann, aby mi pomohl ve škole vyřešit problémy s aktualizacemi Platformia. Musel jsem to tedy udělat přes příkazový řádek. Nakonec stačilo udělat pouze toto:
+mcedit /etc/apt/apt.conf -> a vymazat školní adresu 192.168.1.1:800 a uložit.
 
 Takový byl postup zprovoznění homie v učebně ve škole někdy v první polovině října:
 Kód funguje tak, že se rozsvítí ledka a data se odešlou na server. Po stisknutí tlačítka se ledka vypne a změněné údaje se zaktualizují a odešlou na MQTT server.
@@ -35,4 +39,6 @@ mosquitto_sub -t "#" -v -> vypíše MQTT
 sudo apt install mosquitto -> install mosquitta, je nezbytné k funkčnosti programu
 
 sudo apt install mosquitto clients -> sub a pub
+
+
 
