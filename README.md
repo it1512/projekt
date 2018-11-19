@@ -8,12 +8,25 @@ Součástky, které potřebuji k funkčnosti programu jsou: Relátka na 5V, tran
 Původně jsem chtěl dělat v Arduinu, ale díky tomu, že budu muset dělat odesílání dat na MQTT, budu muset použít právě ESP8266.
 
 PROBLÉMY:
-Moje první pokusy začaly, když jsem doma stáhl a nainstaloval VirtualBox a na něm spustil Ubuntu 16.04. Poté jsem stáhl kód ze stránky:
+Moje první pokusy začaly, když jsem doma stáhl a nainstaloval VirtualBox a na něm spustil Ubuntu 16.04. Poté jsem si našel jednoduchý kód, abych podrobněji zjistil, jak homie funguje. Ve škole jsem ho zprovoznil bez větších problémů a i s pomocí pana učitele jsem pochopil, co jak funguje.
 
-https://github.com/petrgru/homie-dual-relay -> abych podrobněji zjistil, jak homie funguje. Ve škole jsem ho zprovoznil bez větších problémů a s pomocí pana učitele jsem pochopil, co jak funguje.
 
 Avšak zde byl problém s právy, s kterým jsem myslel, že si poradím, protože ten stejný problém jsem řešil ve škole na PC a úspěšně jej vyřešil. Jenomže doma tento postup nefungoval a po následných konzultacích na fórech a také s panem učitelem jsem přišel se závěrem, že bude problém s tím, že Ubuntu 16.04 spouštím ve VirtualBoxu. Takže jsem se rozhlodl, že to zkusím ještě ve Windowsu i přes to, že mi to pan učitel zavrhl. Vyjímečně měl pravdu, jelikož tam jsem měl chyb ještě víc a nedokázal jsem si s nimi poradit a nechtělo se mi s tím piplat, protože je jednodušší si doma vytvořit stejné podmínky jako ve škole tím, že doma nainstaluju do jednoho ze svých notebooků Ubuntu. Pan učitel mě zaúkoloval tím, že si v něm mám stáhnout VSCode, v něm nainstalovat Platformio a rozběhat MQTT s pomocí Homie. Tak jsem nakonec zprovoznil čistý linux na notebooku a chtěl jsem v aplikacích najít a nainstalovat Visual Studio Code tak, jak jsem to dělal i ve VirtualBoxu. Nakonec jsem jej stáhl a nakonec i úspěšně rozbalil jako soubor .deb a vše se zdalo funkční. Měl jsem tedy připravené podmínky pro první test na mém notebooku abych konečně mohl dělat vlastní kód, když už vím, jak funguje MQTT. Avšak se naskytl další problém s ručně nastavenou školní adresou, což dělal pan učitel Grussmann, aby mi pomohl ve škole vyřešit problémy s aktualizacemi Platformia. Musel jsem to tedy udělat přes příkazový řádek. Nakonec stačilo udělat pouze toto:
-mcedit /etc/apt/apt.conf -> a vymazat školní adresu 192.168.1.1:800 a uložit.
+mcedit /etc/apt/apt.conf -> a vymazat školní adresu 192.168.1.1:800 a uložit. Ovšem proxy byla nastavená na více místech. Pro vypsání jsem použil příkaz:
+
+grep proxy /etc/apt/apt.conf
+
+grep proxy /etc/apt/apt.conf.d
+
+Vypsané proxy jsem odstranil příkazem:
+
+env | grep -i proxy
+
+env | grep -iR proxy /etc/apt 
+
+Proxy adresy jsem odstranil, avšak při restartu počítače se adresy objevily zpět. Což podle mého znamenalo, že proxy byla ještě někde jinde.  Nakonec, abych se nezdržoval nadále, protože jsem potřeboval stáhnout jen pár programů, tak jsem to vyřešil následovně:
+
+sudo apt-get -o Acquire::http::proxy=false <update/install> -> u každého příkazu jsem ručně zadával nastavení bez proxy
 
 Takový byl postup zprovoznění homie v učebně ve škole někdy v první polovině října:
 Kód funguje tak, že se rozsvítí ledka a data se odešlou na server. Po stisknutí tlačítka se ledka vypne a změněné údaje se zaktualizují a odešlou na MQTT server.
@@ -40,5 +53,7 @@ sudo apt install mosquitto -> install mosquitta, je nezbytné k funkčnosti prog
 
 sudo apt install mosquitto clients -> sub a pub
 
-
+Zdroje:
+https://github.com/petrgru/homie-dual-relay
+https://askubuntu.com/questions/344802/why-is-apt-get-always-using-proxy-although-no-proxy-is-configured
 
