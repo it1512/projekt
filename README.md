@@ -57,3 +57,12 @@ Zdroje:
 https://github.com/petrgru/homie-dual-relay
 https://askubuntu.com/questions/344802/why-is-apt-get-always-using-proxy-although-no-proxy-is-configured
 
+
+
+http://arduinonavody.cz/arduino-s-fotorezistorem-svetelny-senzor/
+
+https://www.esp8266.com/viewtopic.php?f=32&t=17465
+
+analogRead(a0)
+
+
