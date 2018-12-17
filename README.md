@@ -63,7 +63,7 @@ http://arduinonavody.cz/arduino-s-fotorezistorem-svetelny-senzor/
 
 https://www.esp8266.com/viewtopic.php?f=32&t=17465
 
-https://www.ibm.com/developerworks/opensource/tutorials/os-arduino3/index.html?ca=drs
+https://www.instructables.com/id/Laser-data-transfer-part2-Binary-transmitting/
 
 analogRead(a0)
 
