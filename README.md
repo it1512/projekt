@@ -65,6 +65,10 @@ https://www.esp8266.com/viewtopic.php?f=32&t=17465
 
 https://www.instructables.com/id/Laser-data-transfer-part2-Binary-transmitting/
 
+http://www.ti.com/product/LM6511#
+
+https://techtutorialsx.com/2016/12/11/esp8266-external-interrupts/
+
 analogRead(a0)
 
 
