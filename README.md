@@ -71,4 +71,6 @@ https://techtutorialsx.com/2016/12/11/esp8266-external-interrupts/
 
 analogRead(a0)
 
+https://www.google.cz/search?q=comparator+lm393+schema&client=opera&hs=W3H&source=lnms&tbm=isch&sa=X&ved=0ahUKEwixuYKW8MLfAhXFaFAKHeJ5CC8Q_AUIDigB&biw=1472&bih=751#imgrc=tGrUwk1J-KvUSM:
+
 
