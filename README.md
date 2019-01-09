@@ -18,7 +18,80 @@ grep proxy /etc/apt/apt.conf
 
 grep proxy /etc/apt/apt.conf.d
 
-Vypsané proxy jsem odstranil příkazem:
+Vypsané proxy jsem odstranil příkazem: NE
+
+preruseni:
+
+//#include <arduino.h>
+#include <ESP8266WiFi.h>
+#include <Hash.h>
+#include <Ticker.h>
+#include <ESP8266mDNS.h>
+#include <ESP8266HTTPClient.h>
+#include <DNSServer.h>
+
+int ldr = 17; //analogovy pin kde je pripojeno LDR
+int ldr_value = 0; //variable to store LDR values
+int LED = 5;
+int LASER = 4;
+int BUTTON = 2;
+bool trigger = true;
+const byte Comparator = 16;
+unsigned int period = 500, eror = 5;
+unsigned int time_now, time_interupt;
+bool LED_ON = true;
+bool blink = true;
+ 
+void setup()
+{
+ Serial.begin(9600); //spuštění serioveho rozhrani
+ pinMode(LED, OUTPUT);
+ pinMode(LASER, OUTPUT);
+ pinMode(BUTTON, INPUT);
+ pinMode(Comparator, INPUT_PULLUP);
+ digitalWrite(LASER, HIGH);
+ attachInterrupt(digitalPinToInterrupt(Comparator), Interupt , CHANGE);
+ time_now = millis();
+}
+
+void loop()
+{
+  if (millis() >= time_now + period){
+    //Serial.println(LED_ON ? "Zapnuto": "Vypnuto");
+    //Serial.println(millis() - time_now);
+    time_now = millis();
+    LED_ON ? digitalWrite(LASER, LOW) : digitalWrite(LASER, HIGH);
+    LED_ON = !LED_ON; 
+  }
+}
+
+void Interupt()
+{
+  if (trigger){
+    if (blink){
+      time_interupt = millis();
+      blink = !blink;
+    }
+    else if (millis() <= time_interupt + period + eror || millis() >= time_interupt + period - eror){
+      Serial.println(millis() - time_interupt);
+      time_interupt = millis();
+    }
+    else{
+      Serial.println(millis() - time_interupt);
+      digitalWrite(LED, HIGH);
+      trigger = false;
+    }
+  }
+  else{
+    if(digitalRead(BUTTON) == LOW){
+      blink = !blink;
+      digitalWrite(LED, LOW);
+      trigger = true;
+      Serial.println("Zmackl jsem tlacitko");
+    }
+  }
+  Serial.println("Jsem v interuptu");
+}
 
 env | grep -i proxy
 
