@@ -1,3 +1,5 @@
+POPISKY K DOKUMENTACI - NEČÍST
+
 # projekt
 Projekt Alarm:
 
